@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!url) {
             showError('Please enter a valid URL');
             return;
+        } else if (!/^(https?|ftp):\/\//.test(url)) {
+            url = `http://${url}`;
         }
         
         // Show loading indicator
@@ -29,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ url })
+                body: JSON.stringify({ url: urlInput.value })
             });
             
             const data = await response.json();
