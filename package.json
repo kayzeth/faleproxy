@@ -21,12 +21,13 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "nock": "^13.5.6",
     "nodemon": "^3.0.1",
     "supertest": "^6.3.4"
   },
   "jest": {
-    "testEnvironment": "node",
+    "testEnvironment": "jsdom",
     "collectCoverageFrom": [
       "**/*.js",
       "!**/node_modules/**",
@@ -40,6 +41,12 @@
         "functions": 70,
         "lines": 70
       }
-    }
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(cheerio)/)"
+    ],
+    "testMatch": [
+      "**/tests/url-protocol.test.js"
+    ]
   }
 }

@@ -11,13 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
     urlForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const url = urlInput.value.trim();
+        let url = urlInput.value.trim();
+        console.log(url);
         
         if (!url) {
             showError('Please enter a valid URL');
             return;
         } else if (!/^(https?|ftp):\/\//.test(url)) {
+            console.log("fixing url " + url);
             url = `http://${url}`;
+            console.log("fixed url " + url);
         }
         
         // Show loading indicator
@@ -31,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ url: urlInput.value })
+                body: JSON.stringify({ url: url })
             });
             
             const data = await response.json();
