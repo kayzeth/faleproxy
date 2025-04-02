@@ -85,7 +85,10 @@ function createApp(options = {}) {
         originalUrl: url
       });
     } catch (error) {
-      console.error('Error fetching URL:', error.message);
+      // Use a silent logger in test environment
+      if (process.env.NODE_ENV !== 'test') {
+        console.error('Error fetching URL:', error.message);
+      }
       return res.status(500).json({
         error: `Failed to fetch content: ${error.message}`
       });
